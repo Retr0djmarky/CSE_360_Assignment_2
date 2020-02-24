@@ -1,5 +1,7 @@
 package cse360assign2;
 
+import java.util.Arrays;
+
 // Marcus Perez
 // Class ID: 384
 // Assignment #1
@@ -33,26 +35,21 @@ public class SimpleList {
 			count++;
 		}
 		else {	
-			// If the count is less than 10, move all the elements and increment the count
-			if(count < 10) {
-				// Start at the tail of the array and move each element forward one index
-				for(int i = count-1; i >= 0; i--) {
-					list[i + 1] = list[i];
-				}
-				
-				list[0] = value;
-				
-				count++;
+			// If the count is greater or equal to 10, resize the array
+			if(count >= list.length) {
+				int newSize = (int) (count * 1.5);
+				int[] tempList = Arrays.copyOf(list, newSize);
+				list  = tempList;
 			}
-			// If the count is greater than or equal to  10, only move all the elements
-			else {
-				// Start at the tail of the array and move each element forward one index
-				for(int i = count-2; i >= 0; i--) {
-					list[i + 1] = list[i];
-				}
-				
-				list[0] = value;
+			
+			// Start at the tail of the array and move each element forward one index
+			for(int i = count-1; i >= 0; i--) {
+				list[i + 1] = list[i];
 			}
+			
+			list[0] = value;
+			
+			count++;
 		}
 	}
 	
@@ -72,10 +69,17 @@ public class SimpleList {
 				}
 				
 				list[count-1]  = 0;
-				
 				count--;
-				
 				i = count;
+				
+				// Get the size of 75% of the current array
+				int temp = (int) (list.length * .75);
+				
+				// If count is smaller than 75% of the array, resize
+				if(count < temp) {
+					int[] tempList = Arrays.copyOf(list, temp);
+					list  = tempList;
+				}
 			}
 		}
 	}
