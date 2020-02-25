@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 // Marcus Perez
 // Class ID: 384
-// Assignment #1
+// Assignment #2
 
 // Java object that contains int array and count variable
 // which has functions that can alter, modify, or print the list
@@ -110,9 +110,7 @@ public class SimpleList {
 			// Adds the tail element to the string
 			listStr += list[count-1];
 		}
-		
-		
-		
+			
 		return listStr;
 	}
 	
@@ -135,4 +133,50 @@ public class SimpleList {
 		
 		return index;
 	}
+
+	/**
+	 * Place value at the end of the array, making the array bigger if needed
+	 * 
+	 * @param  value  the number that is to be added to the array.
+	 */
+	public void append(int value) {
+		// If our count is 0, set the element to the head of the list
+		if(count == 0) {
+			list[count] = value;
+			count++;
+		}
+		else {	
+			// If the count is greater or equal to 10, resize the array
+			if(count >= list.length) {
+				int newSize = (int) (count * 1.5);
+				int[] tempList = Arrays.copyOf(list, newSize);
+				list  = tempList;
+			}
+			
+			list[count] = value;
+			
+			count++;
+		}
+	}
+	
+	/**
+	 * Returns the first element of the array
+	 * 
+	 * @return        int of the first element in the array
+	 */
+	public int first() {
+		return list[0];
+	}
+	
+	/**
+	 * Returns the number of available spots in the list
+	 * 
+	 * @return        int of the amount of possible locations
+	 */
+	public int size() {
+		return list.length;
+	}
+
+
+
 }
